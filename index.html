@@ -11,6 +11,11 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             overflow: hidden;
@@ -23,7 +28,6 @@
             transition: all 1.5s ease-in-out;
         }
 
-        /* Temas de fundo baseados no tempo do jogo */
         body.day { background: linear-gradient(135deg, #87CEEB, #98D8E8); }
         body.afternoon { background: linear-gradient(135deg, #FFA500, #FF7F50); }
         body.night { background: linear-gradient(135deg, #2C3E50, #34495E); }
@@ -31,8 +35,9 @@
         body.hot { background: linear-gradient(135deg, #FF4500, #FF6347); }
 
         #game-container {
-            width: 900px;
-            height: 600px;
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 3 / 2;
             border: 3px solid #333;
             border-radius: 10px;
             position: relative;
@@ -47,153 +52,6 @@
             width: 100%;
             height: 100%;
             background: transparent;
-        }
-
-        #player {
-            position: absolute;
-            width: 35px;
-            height: 35px;
-            background: radial-gradient(circle, #4CAF50, #45A049);
-            border-radius: 50%;
-            border: 3px solid #2E7D32;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.1s ease;
-        }
-
-        #player.moving {
-            animation: bounce 0.3s infinite alternate;
-        }
-
-        @keyframes bounce {
-            from { transform: scale(1) rotate(0deg); }
-            to { transform: scale(1.05) rotate(5deg); }
-        }
-
-        #enemy {
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            background: radial-gradient(circle, #DC3545, #C82333);
-            border-radius: 50%;
-            border: 3px solid #A71E2A;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .platform {
-            position: absolute;
-            background: linear-gradient(135deg, #795548, #5D4037);
-            border-radius: 8px;
-            border: 2px solid #3E2723;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        #platform1 { left: 0; top: 550px; width: 200px; height: 25px; }
-        #platform2 { left: 250px; top: 450px; width: 150px; height: 25px; }
-        #platform3 { left: 450px; top: 350px; width: 180px; height: 25px; }
-        #platform4 { left: 680px; top: 250px; width: 120px; height: 25px; }
-        #platform5 { left: 100px; top: 200px; width: 140px; height: 25px; }
-        #platform6 { left: 400px; top: 150px; width: 120px; height: 25px; }
-        
-        /* Plataforma especial que quica */
-        .bounce-platform {
-            background: linear-gradient(135deg, #FF6B6B, #FF8E53) !important;
-            border-color: #FF4757 !important;
-            animation: bounceGlow 2s infinite;
-        }
-        
-        @keyframes bounceGlow {
-            0%, 100% { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
-            50% { box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6); }
-        }
-
-        .key {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background: radial-gradient(circle, #FFD700, #FFA500);
-            border-radius: 50%;
-            border: 2px solid #FF8C00;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-            animation: sparkle 1.5s infinite;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); }
-            50% { box-shadow: 0 3px 15px rgba(255, 215, 0, 0.8); }
-        }
-
-        .door {
-            position: absolute;
-            width: 50px;
-            height: 80px;
-            background: linear-gradient(135deg, #555, #333);
-            border: 3px solid #222;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .door.opened {
-            background: linear-gradient(135deg, #28A745, #20C997);
-            border-color: #1E7E34;
-            animation: doorOpen 0.5s ease;
-        }
-
-        @keyframes doorOpen {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        /* Posições das portas */
-        #doorA { left: 800px; top: 470px; }
-        #doorB { left: 50px; top: 120px; }
-        #doorC { left: 650px; top: 170px; }
-
-        #game-info {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 12px 16px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            min-width: 200px;
-            backdrop-filter: blur(5px);
-        }
-
-        #message-display {
-            margin-top: 8px;
-            color: #FFD700;
-            font-weight: bold;
-            min-height: 20px;
-        }
-
-        #controls {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            backdrop-filter: blur(5px);
         }
 
         #start-button {
@@ -221,511 +79,101 @@
             transform: none;
         }
 
-        .victory-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: #FFD700;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            z-index: 1000;
-            animation: victoryPulse 1s infinite alternate;
+        @media (max-width: 768px) {
+            #controls {
+                bottom: auto;
+                top: 10px;
+                right: 10px;
+                font-size: 10px;
+                padding: 6px;
+            }
+
+            #game-info {
+                top: 10px;
+                left: auto;
+                right: 10px;
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .platform, .door, .key, #player, #enemy {
+                transform: scale(0.8);
+                transform-origin: top left;
+            }
+
+            .victory-message {
+                font-size: 20px;
+                padding: 20px;
+            }
+
+            #mobile-controls {
+                display: flex;
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                gap: 10px;
+                z-index: 1000;
+            }
+
+            .mobile-btn {
+                width: 60px;
+                height: 60px;
+                background: rgba(0,0,0,0.6);
+                color: white;
+                font-size: 24px;
+                border: none;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                user-select: none;
+                touch-action: manipulation;
+            }
         }
 
-        @keyframes victoryPulse {
-            from { transform: translate(-50%, -50%) scale(1); }
-            to { transform: translate(-50%, -50%) scale(1.05); }
+        #mobile-controls {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <div id="game-world">
-            <div id="player"></div>
-            <div id="enemy"></div>
-
-            <!-- Plataformas -->
-            <div class="platform" id="platform1"></div>
-            <div class="platform" id="platform2"></div>
-            <div class="platform" id="platform3"></div>
-            <div class="platform" id="platform4"></div>
-            <div class="platform" id="platform5"></div>
-            <div class="platform bounce-platform" id="platform6"></div>
-
-            <!-- Portas -->
-            <div class="door" data-door-id="A" id="doorA">A</div>
-            <div class="door" data-door-id="B" id="doorB">B</div>
-            <div class="door" data-door-id="C" id="doorC">C</div>
-
-            <!-- Interface do jogo -->
-            <div id="game-info">
-                <div>⏱️ Tempo: <span id="time-display">00:00</span></div>
-                <div>🗝️ Chaves: <span id="keys-display">0</span></div>
-                <div>🚪 Portas Abertas: <span id="doors-display">0/3</span></div>
-                <div id="message-display"></div>
-            </div>
-
-            <div id="controls">
-                <div>🎮 Controles:</div>
-                <div>A/D ou ← → : Mover</div>
-                <div>W ou ↑ ou ESPAÇO : Pular</div>
-            </div>
-        </div>
+  <div id="game-container">
+    <div id="game-world"></div>
+    <div id="mobile-controls">
+      <button class="mobile-btn" id="btn-left">⬅️</button>
+      <button class="mobile-btn" id="btn-jump">⬆️</button>
+      <button class="mobile-btn" id="btn-right">➡️</button>
     </div>
+  </div>
+  <script>
+    let isMovingLeft = false;
+    let isMovingRight = false;
+    let isOnGround = true;
+    let playerVelY = 0;
+    const jumpStrength = 16;
 
-    <button id="start-button">🚀 Iniciar Jogo</button>
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnJump = document.getElementById('btn-jump');
 
-    <script>
-        // === ELEMENTOS DO DOM ===
-        const gameWorld = document.getElementById('game-world');
-        const player = document.getElementById('player');
-        const enemy = document.getElementById('enemy');
-        const platforms = Array.from(document.getElementsByClassName('platform'));
-        const doors = Array.from(document.getElementsByClassName('door'));
-        const timeDisplay = document.getElementById('time-display');
-        const keysDisplay = document.getElementById('keys-display');
-        const doorsDisplay = document.getElementById('doors-display');
-        const messageDisplay = document.getElementById('message-display');
-        const startButton = document.getElementById('start-button');
-        const body = document.body;
-
-        // === VARIÁVEIS DE JOGO ===
-        let gameStarted = false;
-        let gameInterval;
-        let gameTime = 0;
-        let collectedKeys = new Set();
-        let openedDoors = new Set();
-        let keys = [];
-
-        // === VARIÁVEIS DO JOGADOR ===
-        const playerSpeed = 6;
-        const jumpStrength = 16;
-        const bounceJumpStrength = 25; // Força extra para plataforma que quica
-        const gravity = 0.7;
-        const friction = 0.8;
-        let playerX = 50;
-        let playerY = 500;
-        let playerVelY = 0;
-        let playerVelX = 0;
-        let isOnGround = false;
-        let isMovingLeft = false;
-        let isMovingRight = false;
-
-        // === VARIÁVEIS DO INIMIGO ===
-        const enemySpeed = 2.5;
-        let enemyX = 800;
-        let enemyY = 500;
-        let enemyTargetKeyId = null;
-        let enemyHasKey = false;
-        let stolenKeyPosition = null;
-
-        // === CONFIGURAÇÃO DAS PORTAS E CHAVES ===
-        const doorRequirements = {
-            'A': ['key1'], // Porta A precisa da chave 1
-            'B': ['itemA1', 'itemA2'], // Porta B precisa dos itens que saem da porta A
-            'C': ['itemA3'] // Porta C precisa do item A3
-        };
-
-        const initialKeys = [
-            { id: 'key1', x: 150, y: 500 }
-        ];
-
-        // === FUNÇÕES UTILITÁRIAS ===
-        function setPosition(element, x, y) {
-            element.style.left = `${x}px`;
-            element.style.top = `${y}px`;
+    function setupMobileControls() {
+      // Touch start
+      btnLeft.addEventListener('touchstart', () => isMovingLeft = true);
+      btnRight.addEventListener('touchstart', () => isMovingRight = true);
+      btnJump.addEventListener('touchstart', () => {
+        if (isOnGround) {
+          playerVelY = -jumpStrength;
+          isOnGround = false;
         }
+      });
 
-        function checkCollision(rect1, rect2) {
-            return rect1.x < rect2.x + rect2.width &&
-                   rect1.x + rect1.width > rect2.x &&
-                   rect1.y < rect2.y + rect2.height &&
-                   rect1.y + rect1.height > rect2.y;
-        }
+      // Touch end
+      btnLeft.addEventListener('touchend', () => isMovingLeft = false);
+      btnRight.addEventListener('touchend', () => isMovingRight = false);
+    }
 
-        function getElementRect(element) {
-            const rect = element.getBoundingClientRect();
-            const gameRect = gameWorld.getBoundingClientRect();
-            return {
-                x: rect.left - gameRect.left,
-                y: rect.top - gameRect.top,
-                width: rect.width,
-                height: rect.height
-            };
-        }
-
-        function showMessage(msg, duration = 3000) {
-            messageDisplay.textContent = msg;
-            setTimeout(() => {
-                messageDisplay.textContent = '';
-            }, duration);
-        }
-
-        function updateTimeDisplay() {
-            const minutes = Math.floor(gameTime / 60).toString().padStart(2, '0');
-            const seconds = (gameTime % 60).toString().padStart(2, '0');
-            timeDisplay.textContent = `${minutes}:${seconds}`;
-        }
-
-        function updateDisplays() {
-            keysDisplay.textContent = collectedKeys.size;
-            doorsDisplay.textContent = `${openedDoors.size}/3`;
-        }
-
-        function createKey(id, x, y) {
-            const keyElement = document.createElement('div');
-            keyElement.className = 'key';
-            keyElement.dataset.keyId = id;
-            keyElement.id = `key-${id}`;
-            setPosition(keyElement, x, y);
-            gameWorld.appendChild(keyElement);
-            return { id, x, y, element: keyElement };
-        }
-
-        function removeKey(keyId) {
-            const keyElement = document.getElementById(`key-${keyId}`);
-            if (keyElement) {
-                keyElement.remove();
-            }
-            keys = keys.filter(key => key.id !== keyId);
-        }
-
-        // === FÍSICA DO JOGADOR ===
-        function updatePlayer() {
-            // Movimento horizontal
-            if (isMovingLeft) {
-                playerVelX -= 1;
-                player.classList.add('moving');
-            }
-            if (isMovingRight) {
-                playerVelX += 1;
-                player.classList.add('moving');
-            }
-
-            if (!isMovingLeft && !isMovingRight) {
-                player.classList.remove('moving');
-            }
-
-            // Aplicar fricção
-            playerVelX *= friction;
-
-            // Limitar velocidade
-            playerVelX = Math.max(-playerSpeed, Math.min(playerSpeed, playerVelX));
-
-            // Aplicar gravidade
-            playerVelY += gravity;
-
-            // Atualizar posições
-            playerX += playerVelX;
-            playerY += playerVelY;
-
-            // Colisão com plataformas
-            isOnGround = false;
-            const playerRect = { x: playerX, y: playerY, width: 35, height: 35 };
-
-            platforms.forEach(platform => {
-                const platformRect = getElementRect(platform);
-                
-                if (checkCollision(playerRect, platformRect)) {
-                    // Colisão por cima (aterrissando na plataforma)
-                    if (playerVelY > 0 && playerY < platformRect.y) {
-                        playerY = platformRect.y - 35;
-                        
-                        // Verifica se é uma plataforma que quica
-                        if (platform.classList.contains('bounce-platform')) {
-                            playerVelY = -bounceJumpStrength; // Super pulo!
-                            showMessage('🚀 SUPER PULO!', 1000);
-                            
-                            // Efeito visual da plataforma
-                            platform.style.transform = 'scaleY(0.8)';
-                            setTimeout(() => {
-                                platform.style.transform = 'scaleY(1)';
-                            }, 200);
-                        } else {
-                            playerVelY = 0;
-                            isOnGround = true;
-                        }
-                    }
-                    // Colisão por baixo (batendo a cabeça)
-                    else if (playerVelY < 0 && playerY > platformRect.y) {
-                        playerY = platformRect.y + platformRect.height;
-                        playerVelY = 0;
-                    }
-                }
-            });
-
-            // Limites da tela
-            if (playerX < 0) {
-                playerX = 0;
-                playerVelX = 0;
-            }
-            if (playerX > 865) {
-                playerX = 865;
-                playerVelX = 0;
-            }
-
-            // Chão do jogo
-            if (playerY > 565) {
-                playerY = 565;
-                playerVelY = 0;
-                isOnGround = true;
-            }
-
-            setPosition(player, playerX, playerY);
-        }
-
-        // === LÓGICA DO INIMIGO ===
-        function updateEnemy() {
-            let targetX = playerX;
-            let targetY = playerY;
-
-            // Se o inimigo roubou uma chave, volta para devolvê-la
-            if (enemyHasKey && stolenKeyPosition) {
-                targetX = stolenKeyPosition.x;
-                targetY = stolenKeyPosition.y;
-
-                // Se chegou ao destino, devolve a chave
-                const distance = Math.sqrt(Math.pow(enemyX - targetX, 2) + Math.pow(enemyY - targetY, 2));
-                if (distance < 30) {
-                    const newKey = createKey(enemyTargetKeyId, stolenKeyPosition.x, stolenKeyPosition.y);
-                    keys.push(newKey);
-                    enemyHasKey = false;
-                    enemyTargetKeyId = null;
-                    stolenKeyPosition = null;
-                    showMessage(`🔄 Inimigo devolveu a chave!`);
-                }
-            }
-
-            // Movimento do inimigo
-            const deltaX = targetX - enemyX;
-            const deltaY = targetY - enemyY;
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-            if (distance > 5) {
-                enemyX += (deltaX / distance) * enemySpeed;
-                enemyY += (deltaY / distance) * enemySpeed;
-            }
-
-            // Colisão com jogador (roubar chave)
-            const playerRect = { x: playerX, y: playerY, width: 35, height: 35 };
-            const enemyRect = { x: enemyX, y: enemyY, width: 32, height: 32 };
-
-            if (checkCollision(playerRect, enemyRect) && collectedKeys.size > 0 && !enemyHasKey) {
-                const keysArray = Array.from(collectedKeys);
-                const stolenKey = keysArray[Math.floor(Math.random() * keysArray.length)];
-                
-                collectedKeys.delete(stolenKey);
-                enemyHasKey = true;
-                enemyTargetKeyId = stolenKey;
-                
-                // Encontrar posição original da chave
-                if (stolenKey === 'key1') {
-                    stolenKeyPosition = { x: 150, y: 500 };
-                } else {
-                    stolenKeyPosition = { x: Math.random() * 800, y: 400 };
-                }
-                
-                updateDisplays();
-                showMessage(`😈 Inimigo roubou sua chave ${stolenKey}!`);
-            }
-
-            setPosition(enemy, enemyX, enemyY);
-        }
-
-        // === COLISÕES COM ITENS ===
-        function checkCollisions() {
-            const playerRect = { x: playerX, y: playerY, width: 35, height: 35 };
-
-            // Colisão com chaves
-            keys.forEach(key => {
-                const keyRect = getElementRect(key.element);
-                if (checkCollision(playerRect, keyRect)) {
-                    collectedKeys.add(key.id);
-                    removeKey(key.id);
-                    updateDisplays();
-                    showMessage(`🗝️ Chave ${key.id} coletada!`);
-                }
-            });
-
-            // Colisão com portas
-            doors.forEach(door => {
-                if (openedDoors.has(door.dataset.doorId)) return;
-
-                const doorRect = getElementRect(door);
-                if (checkCollision(playerRect, doorRect)) {
-                    const requiredKeys = doorRequirements[door.dataset.doorId];
-                    const hasAllKeys = requiredKeys.every(keyId => collectedKeys.has(keyId));
-
-                    if (hasAllKeys) {
-                        door.classList.add('opened');
-                        openedDoors.add(door.dataset.doorId);
-                        
-                        // Remove chaves usadas
-                        requiredKeys.forEach(keyId => collectedKeys.delete(keyId));
-                        
-                        // Adiciona novas chaves quando uma porta é aberta
-                        if (door.dataset.doorId === 'A') {
-                            const newKeys = [
-                                createKey('itemA1', 350, 400),
-                                createKey('itemA2', 600, 300),
-                                createKey('itemA3', 200, 150)
-                            ];
-                            keys.push(...newKeys);
-                        }
-                        
-                        updateDisplays();
-                        showMessage(`🚪 Porta ${door.dataset.doorId} aberta!`);
-                        checkVictory();
-                    } else {
-                        const missingKeys = requiredKeys.filter(keyId => !collectedKeys.has(keyId));
-                        showMessage(`❌ Precisa das chaves: ${missingKeys.join(', ')}`);
-                    }
-                }
-            });
-        }
-
-        // === EFEITOS VISUAIS ===
-        function updateBackground() {
-            const cycle = gameTime % 120; // Ciclo completo de 2 minutos
-            
-            body.className = '';
-            if (cycle < 24) body.classList.add('day');
-            else if (cycle < 48) body.classList.add('afternoon');
-            else if (cycle < 72) body.classList.add('night');
-            else if (cycle < 96) body.classList.add('cold');
-            else body.classList.add('hot');
-        }
-
-        // === VITÓRIA ===
-        function checkVictory() {
-            if (openedDoors.size === 3) {
-                gameStarted = false;
-                clearInterval(gameInterval);
-                
-                const victoryDiv = document.createElement('div');
-                victoryDiv.className = 'victory-message';
-                victoryDiv.innerHTML = `
-                    🎉 PARABÉNS! 🎉<br>
-                    Você completou o jogo em ${timeDisplay.textContent}!<br>
-                    <br>
-                    <button onclick="location.reload()" style="padding: 10px 20px; font-size: 16px; margin-top: 10px; cursor: pointer; border: none; border-radius: 5px; background: #28a745; color: white;">
-                        🔄 Jogar Novamente
-                    </button>
-                `;
-                gameWorld.appendChild(victoryDiv);
-            }
-        }
-
-        // === LOOP PRINCIPAL ===
-        function gameLoop() {
-            if (!gameStarted) return;
-            
-            updatePlayer();
-            updateEnemy();
-            checkCollisions();
-            updateBackground();
-            
-            requestAnimationFrame(gameLoop);
-        }
-
-        // === INICIALIZAÇÃO ===
-        function initGame() {
-            // Reset estados
-            playerX = 50;
-            playerY = 500;
-            enemyX = 800;
-            enemyY = 500;
-            playerVelX = 0;
-            playerVelY = 0;
-            isOnGround = false;
-            
-            gameTime = 0;
-            collectedKeys.clear();
-            openedDoors.clear();
-            enemyHasKey = false;
-            enemyTargetKeyId = null;
-            stolenKeyPosition = null;
-
-            // Limpar chaves antigas
-            keys.forEach(key => key.element.remove());
-            keys = [];
-
-            // Criar chaves iniciais
-            initialKeys.forEach(keyData => {
-                const key = createKey(keyData.id, keyData.x, keyData.y);
-                keys.push(key);
-            });
-
-            // Reset portas
-            doors.forEach(door => door.classList.remove('opened'));
-
-            // Reset displays
-            updateTimeDisplay();
-            updateDisplays();
-            messageDisplay.textContent = '';
-
-            // Remover mensagem de vitória se existir
-            const victoryMsg = document.querySelector('.victory-message');
-            if (victoryMsg) victoryMsg.remove();
-
-            setPosition(player, playerX, playerY);
-            setPosition(enemy, enemyX, enemyY);
-        }
-
-        // === EVENT LISTENERS ===
-        document.addEventListener('keydown', (e) => {
-            if (!gameStarted) return;
-            
-            if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
-                isMovingLeft = true;
-                e.preventDefault();
-            }
-            if (e.code === 'KeyD' || e.code === 'ArrowRight') {
-                isMovingRight = true;
-                e.preventDefault();
-            }
-            if ((e.code === 'KeyW' || e.code === 'ArrowUp' || e.code === 'Space') && isOnGround) {
-                playerVelY = -jumpStrength;
-                isOnGround = false;
-                e.preventDefault();
-            }
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (!gameStarted) return;
-            
-            if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
-                isMovingLeft = false;
-            }
-            if (e.code === 'KeyD' || e.code === 'ArrowRight') {
-                isMovingRight = false;
-            }
-        });
-
-        startButton.addEventListener('click', () => {
-            if (!gameStarted) {
-                gameStarted = true;
-                startButton.disabled = true;
-                startButton.textContent = '🎮 Jogo em Andamento...';
-                
-                initGame();
-                
-                gameInterval = setInterval(() => {
-                    gameTime++;
-                    updateTimeDisplay();
-                }, 1000);
-                
-                requestAnimationFrame(gameLoop);
-            }
-        });
-
-        // Inicialização
-        initGame();
-    </script>
+    window.addEventListener('load', setupMobileControls);
+  </script>
 </body>
 </html>
