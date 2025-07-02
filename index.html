@@ -30,17 +30,19 @@
         body.cold { background: linear-gradient(135deg, #ADD8E6, #B0E0E6); }
         body.hot { background: linear-gradient(135deg, #FF4500, #FF6347); }
 
-        #game-container {
-            width: 900px;
-            height: 600px;
-            border: 3px solid #333;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+       #game-container {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 3 / 2;
+    /* OBS: altura agora é definida pelo aspect-ratio */
+    border: 3px solid #333;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
 
         #game-world {
             position: absolute;
@@ -241,6 +243,20 @@
             from { transform: translate(-50%, -50%) scale(1); }
             to { transform: translate(-50%, -50%) scale(1.05); }
         }
+@media (max-width: 768px) {
+    #mobile-controls {
+        display: flex;    /* antes estava “display: none” */
+    }
+    /* Ajustes pontuais de escala, se precisar: */
+    #game-world .platform,
+    #game-world .door,
+    #game-world .key,
+    #player,
+    #enemy {
+        transform: scale(0.8);
+        transform-origin: top left;
+    }
+}
     </style>
 </head>
 <body>
@@ -632,6 +648,37 @@
             
             requestAnimationFrame(gameLoop);
         }
+// === RESPONSIVIDADE E CONTROLES MÓVEIS ===
+function setupMobileUI() {
+    const mobileControls = document.getElementById('mobile-controls');
+    // Se a largura for ≤ 768px, exibe controles; caso contrário, esconde
+    function toggleControls() {
+        if (window.innerWidth <= 768) {
+            mobileControls.style.display = 'flex';
+        } else {
+            mobileControls.style.display = 'none';
+        }
+    }
+
+    // Chama de cara e também ao redimensionar
+    toggleControls();
+    window.addEventListener('resize', toggleControls);
+
+    // Vincula toques (você já tem estas funções, apenas chame-as aqui)
+    btnLeft.addEventListener('touchstart', () => isMovingLeft = true);
+    btnLeft.addEventListener('touchend',   () => isMovingLeft = false);
+    btnRight.addEventListener('touchstart',() => isMovingRight = true);
+    btnRight.addEventListener('touchend',  () => isMovingRight = false);
+    btnJump.addEventListener('touchstart', () => {
+        if (isOnGround) {
+            playerVelY = -jumpStrength;
+            isOnGround = false;
+        }
+    });
+}
+
+// Chama logo no carregamento da página
+window.addEventListener('load', setupMobileUI);
 
         // === INICIALIZAÇÃO ===
         function initGame() {
